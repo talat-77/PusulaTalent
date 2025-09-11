@@ -1,28 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Talat\\Desktop\\SchoolManangement\\SchoolManangement\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{5043C4BF-A3D3-460E-88A9-6D8117249924}|SchoolManangement.Business\\SchoolManangement.Business.csproj|c:\\users\\talat\\desktop\\schoolmanangement\\schoolmanangement\\schoolmanangement.business\\cqrs\\students\\commands\\createstudent\\createstudentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5043C4BF-A3D3-460E-88A9-6D8117249924}|SchoolManangement.Business\\SchoolManangement.Business.csproj|solutionrelative:schoolmanangement.business\\cqrs\\students\\commands\\createstudent\\createstudentcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5043C4BF-A3D3-460E-88A9-6D8117249924}|SchoolManangement.Business\\SchoolManangement.Business.csproj|c:\\users\\talat\\desktop\\schoolmanangement\\schoolmanangement\\schoolmanangement.business\\cqrs\\students\\commands\\createstudent\\createstudentcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5043C4BF-A3D3-460E-88A9-6D8117249924}|SchoolManangement.Business\\SchoolManangement.Business.csproj|solutionrelative:schoolmanangement.business\\cqrs\\students\\commands\\createstudent\\createstudentcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E39AD9E-5734-4BA5-84F9-7419447C5A7F}|SchoolManangement.Entity\\SchoolManangement.Entity.csproj|c:\\users\\talat\\desktop\\schoolmanangement\\schoolmanangement\\schoolmanangement.entity\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E39AD9E-5734-4BA5-84F9-7419447C5A7F}|SchoolManangement.Entity\\SchoolManangement.Entity.csproj|solutionrelative:schoolmanangement.entity\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CDC154C9-6FB7-41F9-9E6E-6B7AE24499B9}|SchoolManangement.API\\SchoolManangement.API.csproj|c:\\users\\talat\\desktop\\schoolmanangement\\schoolmanangement\\schoolmanangement.api\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CDC154C9-6FB7-41F9-9E6E-6B7AE24499B9}|SchoolManangement.API\\SchoolManangement.API.csproj|solutionrelative:schoolmanangement.api\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CDC154C9-6FB7-41F9-9E6E-6B7AE24499B9}|SchoolManangement.API\\SchoolManangement.API.csproj|c:\\users\\talat\\desktop\\schoolmanangement\\schoolmanangement\\schoolmanangement.api\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CDC154C9-6FB7-41F9-9E6E-6B7AE24499B9}|SchoolManangement.API\\SchoolManangement.API.csproj|solutionrelative:schoolmanangement.api\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -30,76 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Student.cs",
-              "DocumentMoniker": "C:\\Users\\Talat\\Desktop\\SchoolManangement\\SchoolManangement\\SchoolManangement.Entity\\Student.cs",
-              "RelativeDocumentMoniker": "SchoolManangement.Entity\\Student.cs",
-              "ToolTip": "C:\\Users\\Talat\\Desktop\\SchoolManangement\\SchoolManangement\\SchoolManangement.Entity\\Student.cs",
-              "RelativeToolTip": "SchoolManangement.Entity\\Student.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:43:51.506Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CreateStudentCommand.cs",
-              "DocumentMoniker": "C:\\Users\\Talat\\Desktop\\SchoolManangement\\SchoolManangement\\SchoolManangement.Business\\CQRS\\Students\\Commands\\CreateStudent\\CreateStudentCommand.cs",
-              "RelativeDocumentMoniker": "SchoolManangement.Business\\CQRS\\Students\\Commands\\CreateStudent\\CreateStudentCommand.cs",
-              "ToolTip": "C:\\Users\\Talat\\Desktop\\SchoolManangement\\SchoolManangement\\SchoolManangement.Business\\CQRS\\Students\\Commands\\CreateStudent\\CreateStudentCommand.cs",
-              "RelativeToolTip": "SchoolManangement.Business\\CQRS\\Students\\Commands\\CreateStudent\\CreateStudentCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:34:34.735Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CreateStudentCommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\Talat\\Desktop\\SchoolManangement\\SchoolManangement\\SchoolManangement.Business\\CQRS\\Students\\Commands\\CreateStudent\\CreateStudentCommandHandler.cs",
-              "RelativeDocumentMoniker": "SchoolManangement.Business\\CQRS\\Students\\Commands\\CreateStudent\\CreateStudentCommandHandler.cs",
-              "ToolTip": "C:\\Users\\Talat\\Desktop\\SchoolManangement\\SchoolManangement\\SchoolManangement.Business\\CQRS\\Students\\Commands\\CreateStudent\\CreateStudentCommandHandler.cs",
-              "RelativeToolTip": "SchoolManangement.Business\\CQRS\\Students\\Commands\\CreateStudent\\CreateStudentCommandHandler.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAuwDwAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:34:20.662Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "StudentController.cs",
-              "DocumentMoniker": "C:\\Users\\Talat\\Desktop\\SchoolManangement\\SchoolManangement\\SchoolManangement.API\\Controllers\\StudentController.cs",
-              "RelativeDocumentMoniker": "SchoolManangement.API\\Controllers\\StudentController.cs",
-              "ToolTip": "C:\\Users\\Talat\\Desktop\\SchoolManangement\\SchoolManangement\\SchoolManangement.API\\Controllers\\StudentController.cs",
-              "RelativeToolTip": "SchoolManangement.API\\Controllers\\StudentController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:32:00.204Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Users\\Talat\\Desktop\\SchoolManangement\\SchoolManangement\\SchoolManangement.API\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "SchoolManangement.API\\Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\Talat\\Desktop\\SchoolManangement\\SchoolManangement\\SchoolManangement.API\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "SchoolManangement.API\\Controllers\\AdminController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:31:52.012Z",
-              "EditorCaption": ""
             }
           ]
         }
