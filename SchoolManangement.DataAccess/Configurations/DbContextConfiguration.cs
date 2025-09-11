@@ -8,20 +8,10 @@ using System.Threading.Tasks;
 
 namespace SchoolManangement.DataAccess.Configurations
 {
-     static class DbContextConfiguration
+    static class DbContextConfiguration
     {
-        public static string GetConnectionString
-        {
-            get
-            {
-               ConfigurationManager configurationManager = new();
-
-                configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../SchoolManangement.API"));
-                configurationManager.AddJsonFile("appsettings.json");
-                return configurationManager.GetConnectionString("PostgreSql");
-
-            }
-        }
-
+        public static string GetConnectionString =>
+            Environment.GetEnvironmentVariable("POSTGRESQL_URL")
+            ?? throw new InvalidOperationException("POSTGRESQL_URL environment variable tanımlanmamış!");
     }
 }

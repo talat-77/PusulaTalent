@@ -15,10 +15,12 @@ namespace SchoolManangement.DataAccess.Data
         {
             var optionsBuilder = new DbContextOptionsBuilder<SchoolManangementDbContext>();
 
-            var connectionString = "Host=localhost;Port=5433;Database=SchoolManangement;Username=postgres;Password=123456789";
+            var connectionString = Environment.GetEnvironmentVariable("POSTGRESQL_URL")
+                                   ?? throw new InvalidOperationException("POSTGRESQL_URL environment variable tanımlanmamış!");
 
             optionsBuilder.UseNpgsql(connectionString);
             return new SchoolManangementDbContext(optionsBuilder.Options);
         }
     }
+
 }
