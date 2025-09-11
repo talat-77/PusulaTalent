@@ -61,6 +61,9 @@ C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\bin\Debug\net9.0\Mono.TextTemplating.dll
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\bin\Debug\net9.0\Npgsql.dll
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\bin\Debug\net9.0\System.CodeDom.dll
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\bin\Debug\net9.0\System.Composition.AttributedModel.dll
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\bin\Debug\net9.0\System.Composition.Convention.dll
@@ -147,6 +150,7 @@ C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\obj\Debug\net9.0\SchoolManangement.API.csproj.CoreCompileInputs.cache
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\obj\Debug\net9.0\SchoolManangement.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\obj\Debug\net9.0\SchoolManangement.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\obj\Debug\net9.0\SchoolManangement.API.sourcelink.json
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\obj\Debug\net9.0\rjimswa.dswa.cache.json
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json
@@ -162,6 +166,3 @@ C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\obj\Debug\net9.0\SchoolManangement.API.pdb
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\obj\Debug\net9.0\SchoolManangement.API.genruntimeconfig.cache
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\obj\Debug\net9.0\ref\SchoolManangement.API.dll
-C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll

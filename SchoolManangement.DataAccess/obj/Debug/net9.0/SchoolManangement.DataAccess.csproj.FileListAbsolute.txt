@@ -9,6 +9,7 @@ C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.Dat
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.DataAccess\obj\Debug\net9.0\SchoolManangement.DataAccess.AssemblyInfoInputs.cache
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.DataAccess\obj\Debug\net9.0\SchoolManangement.DataAccess.AssemblyInfo.cs
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.DataAccess\obj\Debug\net9.0\SchoolManangement.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.DataAccess\obj\Debug\net9.0\SchoolManangement.DataAccess.sourcelink.json
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.DataAccess\obj\Debug\net9.0\SchoolMa.9AB147E3.Up2Date
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.DataAccess\obj\Debug\net9.0\SchoolManangement.DataAccess.dll
 C:\Users\Talat\Desktop\SchoolManangement\SchoolManangement\SchoolManangement.DataAccess\obj\Debug\net9.0\refint\SchoolManangement.DataAccess.dll

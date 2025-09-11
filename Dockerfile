@@ -1,29 +1,23 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-# Copy solution and project files
 COPY *.sln .
 COPY SchoolManangement.API/*.csproj ./SchoolManangement.API/
 COPY SchoolManangement.Business/*.csproj ./SchoolManangement.Business/
 COPY SchoolManangement.DataAccess/*.csproj ./SchoolManangement.DataAccess/
 COPY SchoolManangement.Entity/*.csproj ./SchoolManangement.Entity/
 
-# Restore packages
 RUN dotnet restore
 
-# Copy everything else
 COPY . .
 
-# Build and publish
 WORKDIR /src/SchoolManangement.API
 RUN dotnet publish -c Release -o /app/
 
-# Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app/ .
 
-# Render uses PORT environment variable
 EXPOSE $PORT
 ENV ASPNETCORE_URLS=http://*:$PORT
 
