@@ -18,7 +18,7 @@ namespace SchoolManangement.Entity
         public ClassNumber ClassNumber { get; set; }
         public string StudentNumber { get; set; } = null!;
         public ICollection<StudentCourse> StudentCourses { get; set; }
-        public SchoolClass SchoolClass { get; set; }
+        public SchoolClass? SchoolClass { get; set; }
         public ICollection<Note> Notes { get; set; }
         public Guid? ClassId { get; set; }
     }

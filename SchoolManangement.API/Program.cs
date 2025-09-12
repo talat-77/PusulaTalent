@@ -16,19 +16,8 @@ namespace SchoolManangement.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // 1️⃣ Connection string environment variable'den al
-            var connectionString = Environment.GetEnvironmentVariable("POSTGRESQL_URL");
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                throw new InvalidOperationException("POSTGRESQL_URL environment variable bulunamadı!");
-            }
-            Console.WriteLine("Connection string alındı!");
 
-            // 2️⃣ DbContext'i PostgreSQL ile ekle
-            builder.Services.AddDbContext<SchoolManangementDbContext>(options =>
-                options.UseNpgsql(connectionString));
 
-            // 3️⃣ Identity konfigürasyonu
             builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -42,7 +31,6 @@ namespace SchoolManangement.API
             .AddEntityFrameworkStores<SchoolManangementDbContext>()
             .AddDefaultTokenProviders();
 
-            // 4️⃣ JWT Authentication
             var jwtSection = builder.Configuration.GetSection("Jwt");
             builder.Services.AddAuthentication(options =>
             {
@@ -64,18 +52,15 @@ namespace SchoolManangement.API
                 };
             });
 
-            // 5️⃣ DataAccess ve BusinessLayer
-            builder.Services.AddDataAccessLayer();
+            builder.Services.AddDataAccessLayer(builder.Configuration);
             builder.Services.AddBusinessLayer();
 
-            // 6️⃣ Controller, Swagger
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // 7️⃣ Migration ve admin user işlemleri güvenli scope içinde
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -83,10 +68,8 @@ namespace SchoolManangement.API
                 var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                 var roleManager = services.GetRequiredService<RoleManager<ApplicationRole>>();
 
-                // Migration uygula
                 dbContext.Database.Migrate();
 
-                // Admin user oluştur (varsa atla)
                 if (await userManager.FindByNameAsync("admin") == null)
                 {
                     var admin = new ApplicationUser
@@ -103,7 +86,6 @@ namespace SchoolManangement.API
                 }
             }
 
-            // 8️⃣ Swagger
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -111,7 +93,6 @@ namespace SchoolManangement.API
                 c.RoutePrefix = "swagger";
             });
 
-            // 9️⃣ Middleware ve Controller mapping
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();

@@ -32,22 +32,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "SchoolManangement.API.Controllers.AdminController",
-    "Method": "CreateTeacher",
-    "RelativePath": "api/Admin/create-teacher",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "command",
-        "Type": "SchoolManangement.Business.CQRS.Teachers.Commands.CreateTeacher.CreateTeacherCommand",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "SchoolManangement.API.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/login",
@@ -233,6 +217,22 @@
   },
   {
     "ContainingType": "SchoolManangement.API.Controllers.NoteController",
+    "Method": "GetAllNotes",
+    "RelativePath": "api/Note/GetAllNotes/{StudentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "StudentId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SchoolManangement.API.Controllers.NoteController",
     "Method": "GetAvarageNoteByStudentId",
     "RelativePath": "api/Note/GetAvarageNoteByStudentId/{studentId}",
     "HttpMethod": "GET",
@@ -241,6 +241,22 @@
     "Parameters": [
       {
         "Name": "studentId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SchoolManangement.API.Controllers.SchoolClassController",
+    "Method": "DeleteSchoolClass",
+    "RelativePath": "api/SchoolClass/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
         "Type": "System.Guid",
         "IsRequired": true
       }
@@ -264,6 +280,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SchoolManangement.API.Controllers.SchoolClassController",
+    "Method": "GetAllSchoolClasses",
+    "RelativePath": "api/SchoolClass/GetAllSchoolClasses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SchoolManangement.API.Controllers.StudentController",
     "Method": "CreateStudent",
     "RelativePath": "api/Student",
@@ -275,6 +312,27 @@
         "Name": "command",
         "Type": "SchoolManangement.Business.CQRS.Students.Commands.CreateStudent.CreateStudentCommand",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SchoolManangement.API.Controllers.StudentController",
+    "Method": "GetAllStudents",
+    "RelativePath": "api/Student",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -306,6 +364,22 @@
       {
         "Name": "id",
         "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SchoolManangement.API.Controllers.TeacherController",
+    "Method": "CreateTeacher",
+    "RelativePath": "api/Teacher/create-teacher",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "SchoolManangement.Business.CQRS.Teachers.Commands.CreateTeacher.CreateTeacherCommand",
         "IsRequired": true
       }
     ],

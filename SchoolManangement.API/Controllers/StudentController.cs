@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManangement.Business.CQRS.Students.Commands.AssignStudentToClass;
 using SchoolManangement.Business.CQRS.Students.Commands.CreateStudent;
+using SchoolManangement.Business.CQRS.Students.Queries.GetStudents;
 
 namespace SchoolManangement.API.Controllers
 {
@@ -25,5 +26,15 @@ namespace SchoolManangement.API.Controllers
             var result = await Mediator.Send(command);
             return Ok(result);
         }
+
+        [Authorize(Roles = "Teacher,Admin")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllStudents(int pageSize = 100, int pageNumber = 1)
+        {
+            var result = await Mediator.Send(new GetStudentsQuery { PageSize = pageSize, PageNumber = pageNumber });
+            return Ok(result);
+        }
+
+
     }
 }

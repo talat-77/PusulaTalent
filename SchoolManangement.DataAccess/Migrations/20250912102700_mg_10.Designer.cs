@@ -12,8 +12,8 @@ using SchoolManangement.DataAccess.Data;
 namespace SchoolManangement.DataAccess.Migrations
 {
     [DbContext(typeof(SchoolManangementDbContext))]
-    [Migration("20250911184427_mg_1")]
-    partial class mg_1
+    [Migration("20250912102700_mg_10")]
+    partial class mg_10
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -444,6 +444,10 @@ namespace SchoolManangement.DataAccess.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -452,6 +456,10 @@ namespace SchoolManangement.DataAccess.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("text");
 

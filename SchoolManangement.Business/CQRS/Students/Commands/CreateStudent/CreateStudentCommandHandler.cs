@@ -22,6 +22,7 @@ namespace SchoolManangement.Business.CQRS.Students.Commands.CreateStudent
         private readonly IRepository<Student> _studentRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailService _emailService;
+        private static readonly Random _random = Random.Shared;
 
         public CreateStudentCommandHandler(IUnitOfWork unitOfWork, IMapper mapper,
                                          UserManager<ApplicationUser> userManager, IEmailService emailService)
@@ -35,23 +36,17 @@ namespace SchoolManangement.Business.CQRS.Students.Commands.CreateStudent
 
         public async Task<StudentDto> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
         {
-            // Otomatik credentials üret
             var username = await GenerateUniqueUsername(request.FirstName, request.LastName);
             var password = GeneratePassword();
 
-            // ApplicationUser oluştur
             var newUser = new ApplicationUser
             {
-                Id = Guid.NewGuid(),
                 UserName = username,
-                NormalizedUserName = username.ToUpper(),
                 Email = request.Email,
-                NormalizedEmail = request.Email.ToUpper(),
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 PhoneNumber = request.PhoneNumber,
-                EmailConfirmed = true,
-                SecurityStamp = Guid.NewGuid().ToString()
+                EmailConfirmed = true
             };
 
             var userResult = await _userManager.CreateAsync(newUser, password);
@@ -61,35 +56,47 @@ namespace SchoolManangement.Business.CQRS.Students.Commands.CreateStudent
                 throw new InvalidOperationException($"User oluşturulamadı: {errors}");
             }
 
-            // Student rolünü ekle
-            await _userManager.AddToRoleAsync(newUser, "Student");
-
-            // Student entity oluştur
-            var newStudent = new Student
+            try
             {
-                UserId = newUser.Id,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Age = request.Age,
-                DateOfBirth = request.DateOfBirth,
-                ClassNumber = request.ClassNumber,
-                StudentNumber = string.IsNullOrEmpty(request.StudentNumber) ? await GenerateUniqueStudentNumber() : request.StudentNumber,
-                ClassId = request.ClassId,
-                Email = request.Email,
-                PhoneNumber = request.PhoneNumber
-            };
+                await _userManager.AddToRoleAsync(newUser, "Student");
 
-            await _studentRepository.CreateAsync(newStudent);
-            await _unitOfWork.CommitAsync(cancellationToken);
+                var newStudent = new Student
+                {
+                    UserId = newUser.Id,
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    Age = request.Age,
+                    DateOfBirth = DateTime.SpecifyKind(request.DateOfBirth, DateTimeKind.Utc),
+                    ClassNumber = request.ClassNumber,
+                    StudentNumber = string.IsNullOrEmpty(request.StudentNumber) ? await GenerateUniqueStudentNumber() : request.StudentNumber,
+                    ClassId = null,
+                    Email = request.Email,
+                    PhoneNumber = request.PhoneNumber
+                };
 
-            await SendWelcomeEmail(request.Email, username, password, request.FirstName, request.LastName);
+                await _studentRepository.CreateAsync(newStudent);
+                await _unitOfWork.CommitAsync(cancellationToken);
 
-            var result = _mapper.Map<StudentDto>(newStudent);
+                try
+                {
+                    await SendWelcomeEmail(request.Email, username, password, request.FirstName, request.LastName);
+                }
+                catch (Exception)
+                {
 
-            // Generated credentials'ları console'a yazdır
-            Console.WriteLine($"🎓 Student Created - Username: {username}, Password: {password}, Student Number: {newStudent.StudentNumber}");
+                }
 
-            return result;
+                var result = _mapper.Map<StudentDto>(newStudent);
+
+                Console.WriteLine($"🎓 Student Created - Username: {username}, Password: {password}, Student Number: {newStudent.StudentNumber}");
+
+                return result;
+            }
+            catch
+            {
+                await _userManager.DeleteAsync(newUser);
+                throw;
+            }
         }
 
         private async Task<string> GenerateUniqueUsername(string firstName, string lastName)
@@ -110,12 +117,11 @@ namespace SchoolManangement.Business.CQRS.Students.Commands.CreateStudent
         private async Task<string> GenerateUniqueStudentNumber()
         {
             var year = DateTime.Now.Year.ToString();
-            var random = new Random();
             string studentNumber;
-            
+
             do
             {
-                var randomPart = random.Next(1000, 9999).ToString();
+                var randomPart = _random.Next(1000, 9999).ToString();
                 studentNumber = $"{year}{randomPart}";
             }
             while (await _studentRepository.GetFirstOrDefaultAsync(s => s.StudentNumber == studentNumber) != null);
@@ -125,11 +131,9 @@ namespace SchoolManangement.Business.CQRS.Students.Commands.CreateStudent
 
         private string GeneratePassword()
         {
-            // Güvenli password üretici
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%";
-            var random = new Random();
             return new string(Enumerable.Repeat(chars, 8)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
+                .Select(s => s[_random.Next(s.Length)]).ToArray());
         }
 
         private async Task SendWelcomeEmail(string email, string username, string password, string firstName, string lastName)
@@ -144,7 +148,7 @@ namespace SchoolManangement.Business.CQRS.Students.Commands.CreateStudent
         
         <h3>🔑 GİRİŞ BİLGİLERİNİZ:</h3>
         <ul>
-            <li><strong>Kullanıcı Adı:</strong> {username}</li>
+            <li><strong>Email alanına Mail adresinizi : {email} girin </li>
             <li><strong>Şifre:</strong> {password}</li>
         </ul>
         
@@ -158,7 +162,7 @@ namespace SchoolManangement.Business.CQRS.Students.Commands.CreateStudent
         <p><em>Okul Yönetimi</em></p>
     ";
 
-            await _emailService.SendMailAsync(email, subject, body, true); // isBodyHtml = true
+            await _emailService.SendMailAsync(email, subject, body, true);
         }
     }
 }

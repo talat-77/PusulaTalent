@@ -460,7 +460,7 @@ namespace SchoolManangement.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("SchoolClassId")
+                    b.Property<Guid?>("SchoolClassId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("StudentNumber")
@@ -693,9 +693,7 @@ namespace SchoolManangement.DataAccess.Migrations
                 {
                     b.HasOne("SchoolManangement.Entity.SchoolClass", "SchoolClass")
                         .WithMany("Students")
-                        .HasForeignKey("SchoolClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SchoolClassId");
 
                     b.Navigation("SchoolClass");
                 });

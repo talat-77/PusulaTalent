@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManangement.Business.CQRS.Note.Commands.CreateNote;
 using SchoolManangement.Business.CQRS.Note.Queries.GetAvarageNoteValue;
+using SchoolManangement.Business.CQRS.Note.Queries.GetNotesByStudentId;
 
 namespace SchoolManangement.API.Controllers
 {
@@ -23,6 +24,14 @@ namespace SchoolManangement.API.Controllers
         public async Task<IActionResult> GetAvarageNoteByStudentId(Guid studentId)
         {
             var result = await Mediator.Send(new GetAvarageNoteValueQuery { StudentId = studentId });
+            return Ok(result);
+        }
+
+        [Authorize(Roles ="Admin,Teacher,Student")]
+        [HttpGet("GetAllNotes/{StudentId}")]
+        public async Task<IActionResult> GetAllNotes(Guid StudentId)
+        {
+            var result = await Mediator.Send(new GetNotesByStudentIdQuery { StudentId = StudentId });
             return Ok(result);
         }
     }

@@ -12,7 +12,7 @@ using SchoolManangement.DataAccess.Data;
 namespace SchoolManangement.DataAccess.Migrations
 {
     [DbContext(typeof(SchoolManangementDbContext))]
-    [Migration("20250911193124_mg_2")]
+    [Migration("20250912104737_mg_2")]
     partial class mg_2
     {
         /// <inheritdoc />
@@ -463,7 +463,7 @@ namespace SchoolManangement.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("SchoolClassId")
+                    b.Property<Guid?>("SchoolClassId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("StudentNumber")
@@ -696,9 +696,7 @@ namespace SchoolManangement.DataAccess.Migrations
                 {
                     b.HasOne("SchoolManangement.Entity.SchoolClass", "SchoolClass")
                         .WithMany("Students")
-                        .HasForeignKey("SchoolClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SchoolClassId");
 
                     b.Navigation("SchoolClass");
                 });
