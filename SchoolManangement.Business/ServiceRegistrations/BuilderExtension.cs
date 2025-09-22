@@ -6,6 +6,7 @@ using SchoolManangement.Business.CQRS.Absenteeisms.Commands.CreateAbsenteeism;
 using SchoolManangement.Business.CQRS.Courses.Commands.CreateCourse;
 using SchoolManangement.Business.MappingProfile;
 using SchoolManangement.Business.Services;
+using SchoolManangement.Business.Services.Notification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace SchoolManangement.Business.ServiceRegistrations
             services.AddValidatorsFromAssemblyContaining<CreateCourseCommand>();
             services.AddAutoMapper(cfg => cfg.AddProfile<MappingConfig>());
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IEmailNotificationService, EmailNotificationService>();
             return services;
         }
     }

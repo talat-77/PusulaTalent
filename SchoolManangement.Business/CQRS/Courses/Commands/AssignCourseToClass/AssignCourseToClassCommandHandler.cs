@@ -34,14 +34,14 @@ namespace SchoolManangement.Business.CQRS.Courses.Commands.AssignCourseToClass
             var teacher = await _teacherRepository.GetFirstOrDefaultAsync(x => x.Id == request.TeacherId)??
                 throw new InvalidDataException("Invalid TeacherId");
 
-            var classEntity = await _classRepository.GetFirstOrDefaultAsync(x => x.Id == request.ClassId) ??
+            var classEntity = await _classRepository.GetFirstOrDefaultAsync(x => x.Id == request.SchoolClassId,false,null) ??
                 throw new InvalidDataException("Invalid ClassId");
 
             var course = await _courseRepository.GetFirstOrDefaultAsync(x => x.Id == request.CourseId) ??
                 throw new InvalidDataException("Invalid CourseId");
 
             var existingAssignment = await _assignmentRepository.GetFirstOrDefaultAsync(
-                filter: x => x.SchoolClassId == request.ClassId && x.CourseId == request.CourseId && x.TeacherId == request.TeacherId, false, null);
+                filter: x => x.SchoolClassId == request.SchoolClassId && x.CourseId == request.CourseId && x.TeacherId == request.TeacherId, false, null);
 
             if (existingAssignment != null)
                 return false;

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using SchoolManangement.Business.Dto;
+using SchoolManangement.Business.Helpers;
 using SchoolManangement.Business.Services;
+using SchoolManangement.Business.Services.Notification;
 using SchoolManangement.DataAccess.Repository.Abstract;
 using SchoolManangement.DataAccess.UnitOfWorks.Abstract;
 using SchoolManangement.Entity;
@@ -20,23 +22,23 @@ namespace SchoolManangement.Business.CQRS.Teachers.Commands.CreateTeacher
         private readonly IMapper _mapper;
         private readonly IRepository<Teacher> _teacherRepository;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailService _emailService;
+        private readonly IEmailNotificationService _emailNotificationService;
 
         public CreateTeacherCommandHandler(IUnitOfWork unitofWork, IMapper mapper,
-                                         UserManager<ApplicationUser> userManager, IEmailService emailService)
+                                         UserManager<ApplicationUser> userManager, IEmailNotificationService emailNotificationService)
         {
             _unitofWork = unitofWork;
             _mapper = mapper;
             _userManager = userManager;
             _teacherRepository = _unitofWork.GetRepository<Teacher>();
-            _emailService = emailService;
+            _emailNotificationService = emailNotificationService;
         }
 
         public async Task<TeacherDto> Handle(CreateTeacherCommand request, CancellationToken cancellationToken)
         {
             // Otomatik credentials üret
-            var username = await GenerateUniqueUsername(request.Name, request.Surname);
-            var password = GeneratePassword();
+            var username = await CredentialHelper.GenerateUniqueUsernameAsync(_userManager,request.Name, request.Surname);
+            var password = CredentialHelper.GeneratePassword();
 
             // ApplicationUser oluştur
             var newUser = new ApplicationUser
@@ -77,7 +79,7 @@ namespace SchoolManangement.Business.CQRS.Teachers.Commands.CreateTeacher
             await _teacherRepository.CreateAsync(newTeacher);
             await _unitofWork.CommitAsync();
 
-            await SendWelcomeEmail(request.Email, username, password, request.Name, request.Surname);
+            await _emailNotificationService.SendWelcomeEmailAsync(request.Email, username, password, request.Name, request.Surname);
 
             var result = _mapper.Map<TeacherDto>(newTeacher);
 
@@ -87,56 +89,8 @@ namespace SchoolManangement.Business.CQRS.Teachers.Commands.CreateTeacher
             return result;
         }
 
-        private async Task<string> GenerateUniqueUsername(string name, string surname)
-        {
-            var baseUsername = $"{name.ToLower()}{surname.ToLower()}";
-            var username = baseUsername;
-            var counter = 100;
+      
+       
 
-            while (await _userManager.FindByNameAsync(username) != null)
-            {
-                username = $"{baseUsername}{counter}";
-                counter++;
-            }
-
-            return username;
-        }
-
-        private string GeneratePassword()
-        {
-            // Güvenli password üretici
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%";
-            var random = new Random();
-            return new string(Enumerable.Repeat(chars, 8)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-        private async Task SendWelcomeEmail(string email, string username, string password, string firstName, string lastName)
-        {
-            var subject = "Okul Sistemi - Giriş Bilgileriniz";
-
-            var body = $@"
-        <h2>Sayın {firstName} {lastName},</h2>
-        
-        <p>Okul yönetim sistemine hoş geldiniz!<br>
-        Hesabınız başarıyla oluşturulmuştur.</p>
-        
-        <h3>🔑 GİRİŞ BİLGİLERİNİZ:</h3>
-        <ul>
-            <li><strong>Kullanıcı Adı:</strong> {username}</li>
-            <li><strong>Şifre:</strong> {password}</li>
-        </ul>
-        
-        <p><strong>⚠️ Güvenlik için ilk girişinizde şifrenizi değiştirmeniz önerilir.</strong></p>
-        
-        <p>Sisteme giriş için: <a href='#'>SİSTEM_URL</a></p>
-        
-        <p>İyi çalışmalar dileriz.</p>
-        
-        <hr>
-        <p><em>Okul Yönetimi</em></p>
-    ";
-
-            await _emailService.SendMailAsync(email, subject, body, true); // isBodyHtml = true
-        }
     }
 }

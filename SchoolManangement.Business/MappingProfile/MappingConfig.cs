@@ -26,7 +26,7 @@ namespace SchoolManangement.Business.MappingProfile
 
             CreateMap<CreateCourseCommand, Course>().ReverseMap();
             CreateMap<CourseDto, Course>().ReverseMap();
-            CreateMap<AssignCourseToClassCommand, Course>().ReverseMap();
+            CreateMap<AssignCourseToClassCommand, CourseAssignment>().ReverseMap();
 
             CreateMap<Note, NoteDto>().ReverseMap();
             CreateMap<CreateNoteCommand, Note>().ReverseMap();

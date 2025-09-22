@@ -11,7 +11,6 @@ namespace SchoolManangement.Business.CQRS.Courses.Commands.CreateCourse
 {
     public class CreateCourseCommand:ICommand<CourseDto>
     {
-        public Guid UserId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public int Credit { get; set; }

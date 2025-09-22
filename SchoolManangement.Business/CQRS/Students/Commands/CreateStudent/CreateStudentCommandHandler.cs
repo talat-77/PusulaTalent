@@ -2,7 +2,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using SchoolManangement.Business.Dto;
+using SchoolManangement.Business.Helpers;
 using SchoolManangement.Business.Services;
+using SchoolManangement.Business.Services.Notification;
 using SchoolManangement.DataAccess.Repository.Abstract;
 using SchoolManangement.DataAccess.UnitOfWorks.Abstract;
 using SchoolManangement.Entity;
@@ -21,23 +23,23 @@ namespace SchoolManangement.Business.CQRS.Students.Commands.CreateStudent
         private readonly IMapper _mapper;
         private readonly IRepository<Student> _studentRepository;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailService _emailService;
         private static readonly Random _random = Random.Shared;
+        private readonly IEmailNotificationService _emailNotificationService;
 
         public CreateStudentCommandHandler(IUnitOfWork unitOfWork, IMapper mapper,
-                                         UserManager<ApplicationUser> userManager, IEmailService emailService)
+                                         UserManager<ApplicationUser> userManager, IEmailNotificationService emailNotificationService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _userManager = userManager;
             _studentRepository = _unitOfWork.GetRepository<Student>();
-            _emailService = emailService;
+            _emailNotificationService = emailNotificationService;
         }
 
         public async Task<StudentDto> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
         {
-            var username = await GenerateUniqueUsername(request.FirstName, request.LastName);
-            var password = GeneratePassword();
+            var username = await CredentialHelper.GenerateUniqueUsernameAsync(_userManager,request.FirstName, request.LastName);
+            var password = CredentialHelper.GeneratePassword();
 
             var newUser = new ApplicationUser
             {
@@ -69,7 +71,7 @@ namespace SchoolManangement.Business.CQRS.Students.Commands.CreateStudent
                     DateOfBirth = DateTime.SpecifyKind(request.DateOfBirth, DateTimeKind.Utc),
                     ClassNumber = request.ClassNumber,
                     StudentNumber = string.IsNullOrEmpty(request.StudentNumber) ? await GenerateUniqueStudentNumber() : request.StudentNumber,
-                    ClassId = null,
+                    SchoolClassId = null,
                     Email = request.Email,
                     PhoneNumber = request.PhoneNumber
                 };
@@ -79,7 +81,7 @@ namespace SchoolManangement.Business.CQRS.Students.Commands.CreateStudent
 
                 try
                 {
-                    await SendWelcomeEmail(request.Email, username, password, request.FirstName, request.LastName);
+                    await _emailNotificationService.SendWelcomeEmailAsync(request.Email, username, password, request.FirstName, request.LastName);
                 }
                 catch (Exception)
                 {
@@ -99,20 +101,7 @@ namespace SchoolManangement.Business.CQRS.Students.Commands.CreateStudent
             }
         }
 
-        private async Task<string> GenerateUniqueUsername(string firstName, string lastName)
-        {
-            var baseUsername = $"{firstName.ToLower()}{lastName.ToLower()}";
-            var username = baseUsername;
-            var counter = 100;
-
-            while (await _userManager.FindByNameAsync(username) != null)
-            {
-                username = $"{baseUsername}{counter}";
-                counter++;
-            }
-
-            return username;
-        }
+     
 
         private async Task<string> GenerateUniqueStudentNumber()
         {
@@ -129,40 +118,8 @@ namespace SchoolManangement.Business.CQRS.Students.Commands.CreateStudent
             return studentNumber;
         }
 
-        private string GeneratePassword()
-        {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%";
-            return new string(Enumerable.Repeat(chars, 8)
-                .Select(s => s[_random.Next(s.Length)]).ToArray());
-        }
+       
 
-        private async Task SendWelcomeEmail(string email, string username, string password, string firstName, string lastName)
-        {
-            var subject = "Okul Sistemi - Öğrenci Giriş Bilgileriniz";
-
-            var body = $@"
-        <h2>Sayın {firstName} {lastName},</h2>
-        
-        <p>Okul yönetim sistemine hoş geldiniz!<br>
-        Öğrenci hesabınız başarıyla oluşturulmuştur.</p>
-        
-        <h3>🔑 GİRİŞ BİLGİLERİNİZ:</h3>
-        <ul>
-            <li><strong>Email alanına Mail adresinizi : {email} girin </li>
-            <li><strong>Şifre:</strong> {password}</li>
-        </ul>
-        
-        <p><strong>⚠️ Güvenlik için ilk girişinizde şifrenizi değiştirmeniz önerilir.</strong></p>
-        
-        <p>Sisteme giriş için: <a href='#'>SİSTEM_URL</a></p>
-        
-        <p>İyi çalışmalar dileriz.</p>
-        
-        <hr>
-        <p><em>Okul Yönetimi</em></p>
-    ";
-
-            await _emailService.SendMailAsync(email, subject, body, true);
-        }
+       
     }
 }

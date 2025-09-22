@@ -378,9 +378,6 @@ namespace SchoolManangement.DataAccess.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
                     b.Property<decimal>("Value")
                         .HasColumnType("numeric");
 
@@ -428,9 +425,6 @@ namespace SchoolManangement.DataAccess.Migrations
 
                     b.Property<int>("Age")
                         .HasColumnType("integer");
-
-                    b.Property<Guid?>("ClassId")
-                        .HasColumnType("uuid");
 
                     b.Property<int>("ClassNumber")
                         .HasColumnType("integer");

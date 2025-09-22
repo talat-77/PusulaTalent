@@ -9,7 +9,7 @@ namespace SchoolManangement.Business.CQRS.Courses.Commands.AssignCourseToClass
 {
     public class AssignCourseToClassCommand:ICommand<bool>
     {
-        public Guid ClassId { get; set; }
+        public Guid SchoolClassId { get; set; }
         public Guid CourseId { get; set; }
         public Guid TeacherId { get; set; }
     }

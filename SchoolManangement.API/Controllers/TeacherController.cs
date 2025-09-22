@@ -28,7 +28,7 @@ namespace SchoolManangement.API.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Teacher")]
+        [Authorize(Roles = "Teacher,Admin")]
         [HttpGet("GetStudentByOwnCourse/{teacherId}")]
         public async Task<IActionResult> GetStudentByOwnCourse(Guid teacherId)
         {

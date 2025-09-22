@@ -93,7 +93,7 @@ namespace SchoolManangement.DataAccess.Data
                 if (entry.Entity is BaseEntity entity)
                 {
                     entity.IsDeleted = true;
-                    entry.State = EntityState.Modified;
+                    entry.State = EntityState.Deleted;
                 }
             }
         }

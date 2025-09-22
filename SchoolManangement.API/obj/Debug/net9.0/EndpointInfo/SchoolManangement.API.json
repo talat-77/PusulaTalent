@@ -696,7 +696,7 @@
       "AssignCourseToClassCommand": {
         "type": "object",
         "properties": {
-          "classId": {
+          "schoolClassId": {
             "type": "string",
             "format": "uuid"
           },
@@ -771,10 +771,6 @@
       "CreateCourseCommand": {
         "type": "object",
         "properties": {
-          "userId": {
-            "type": "string",
-            "format": "uuid"
-          },
           "name": {
             "type": "string",
             "nullable": true
@@ -802,10 +798,6 @@
             "format": "double"
           },
           "courseId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "userId": {
             "type": "string",
             "format": "uuid"
           },

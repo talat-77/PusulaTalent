@@ -29,8 +29,6 @@ namespace SchoolManangement.Business.CQRS.Courses.Commands.CreateCourse
 
         public async Task<CourseDto> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
         {
-           var user = await _userRepository.GetFirstOrDefaultAsync(x=>x.Id==request.UserId)??
-                throw new InvalidDataException("User not found");
 
             var newCourse = _mapper.Map<Course>(request);
             await _courseRepository.CreateAsync(newCourse);

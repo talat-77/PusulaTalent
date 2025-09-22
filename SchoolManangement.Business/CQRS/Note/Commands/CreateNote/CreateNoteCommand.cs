@@ -12,7 +12,6 @@ namespace SchoolManangement.Business.CQRS.Note.Commands.CreateNote
     {
         public decimal Value { get; set; }
         public Guid CourseId { get; set; }
-        public Guid UserId { get; set; }
         public Guid TeacherId { get; set; }
         public Guid StudentId { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +19,11 @@ namespace SchoolManangement.Entity
         public ClassNumber ClassNumber { get; set; }
         public string StudentNumber { get; set; } = null!;
         public ICollection<StudentCourse> StudentCourses { get; set; }
+
+        [ForeignKey("SchoolClassId")]
         public SchoolClass? SchoolClass { get; set; }
         public ICollection<Note> Notes { get; set; }
-        public Guid? ClassId { get; set; }
+        public Guid? SchoolClassId { get; set; }
     }
 
     public enum ClassNumber
